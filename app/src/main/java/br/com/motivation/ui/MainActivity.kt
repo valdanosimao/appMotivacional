@@ -5,6 +5,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import br.com.motivation.R
+import br.com.motivation.data.Mock
 import br.com.motivation.databinding.ActivityMainBinding
 import br.com.motivation.infra.MotivationConstants
 import br.com.motivation.infra.SecurityPreferences
@@ -12,7 +13,7 @@ import br.com.motivation.infra.SecurityPreferences
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityMainBinding
-    private var categoryId = 0
+    private var categoryId = MotivationConstants.FILTER.ALL
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         headleUserName()
         handleFilter(R.id.image_all)
+        handleNextPhrase()
 
         //Eventos
         binding.btnNewPhrase.setOnClickListener(this)
@@ -35,10 +37,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View) {
 
         if (view.id == R.id.btn_new_phrase) {
-            var s = ""
+            handleNextPhrase()
         } else if (view.id in listOf(R.id.image_all, R.id.image_emotions, R.id.image_sunny)) {
             handleFilter(view.id)
         }
+    }
+
+    private fun handleNextPhrase(){
+        val  phrase = Mock().getPhrase(categoryId)
+        binding.textPhrase.text = phrase
     }
 
     private fun handleFilter(id: Int) {
