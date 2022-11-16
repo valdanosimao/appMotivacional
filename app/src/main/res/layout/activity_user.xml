@@ -20,12 +20,13 @@
     <EditText
         android:id="@+id/edit_name"
         android:layout_width="match_parent"
-        android:textColorHint="@color/white"
-        android:gravity="center"
-        android:layout_centerInParent="true"
-        android:textSize="24dp"
         android:layout_height="wrap_content"
-        android:hint="@string/your_name"/>
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:hint="@string/your_name"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="24dp" />
 
     <Button
         android:id="@+id/btn_save"
