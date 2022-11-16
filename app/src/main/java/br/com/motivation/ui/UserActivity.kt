@@ -1,10 +1,13 @@
-package br.com.motivation
+package br.com.motivation.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import br.com.motivation.infra.MotivationConstants
+import br.com.motivation.R
+import br.com.motivation.infra.SecurityPreferences
 import br.com.motivation.databinding.ActivityUserBinding
 
 class UserActivity : AppCompatActivity(), View.OnClickListener {
@@ -19,6 +22,8 @@ class UserActivity : AppCompatActivity(), View.OnClickListener {
         binding.btnSave.setOnClickListener(this)
 
         supportActionBar?.hide()
+
+        verifyUserName()
     }
 
     override fun onClick(view: View) {
@@ -27,11 +32,19 @@ class UserActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    private fun verifyUserName(){
+        val name = SecurityPreferences(this).getString(MotivationConstants.key.USER_NAME)
+        if(name != ""){
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+    }
+
     private fun hendlesave() {
         val name = binding.editName.text.toString()
         if (name != "") {
 
-            SecurityPreferences(this).storeString("USER_NAME",name)
+            SecurityPreferences(this).storeString(MotivationConstants.key.USER_NAME, name)
 
             //linha responsável por carregar a Activity /  navegação entre activitys
             startActivity(Intent(this, MainActivity::class.java))

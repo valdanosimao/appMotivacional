@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
     <LinearLayout
         android:id="@+id/linear_menu"
@@ -15,19 +15,21 @@
         android:padding="16dp">
 
         <ImageView
+            android:id="@+id/image_all"
             android:layout_width="0dp"
-            app:tint="@color/white"
             android:layout_height="40dp"
             android:layout_weight="1"
             android:src="@drawable/ic_all_inclusive" />
 
         <ImageView
+            android:id="@+id/image_emotions"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
             android:src="@drawable/ic_emotions" />
 
         <ImageView
+            android:id="@+id/image_sunny"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
