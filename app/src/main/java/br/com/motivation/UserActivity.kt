@@ -30,6 +30,9 @@ class UserActivity : AppCompatActivity(), View.OnClickListener {
     private fun hendlesave() {
         val name = binding.editName.text.toString()
         if (name != "") {
+
+            SecurityPreferences(this).storeString("USER_NAME",name)
+
             //linha responsável por carregar a Activity /  navegação entre activitys
             startActivity(Intent(this, MainActivity::class.java))
             //o finish mata a tela, e não a deixa ficar em memoria
