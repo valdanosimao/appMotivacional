@@ -26,12 +26,18 @@ class UserActivity : AppCompatActivity(), View.OnClickListener {
         verifyUserName()
     }
 
+    /**
+     * Tratamento de clicks dos elementos
+     * */
     override fun onClick(view: View) {
         if (view.id == R.id.btn_save) {
             hendlesave()
         }
     }
 
+    /**
+     * Verifica se usuário já preencheu o nome
+     * */
     private fun verifyUserName(){
         val name = SecurityPreferences(this).getString(MotivationConstants.KEY.USER_NAME)
         if(name != ""){
@@ -40,8 +46,13 @@ class UserActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    /**
+     * Salva o nome do usuário para utilizações futuras
+     * */
     private fun hendlesave() {
+        // Obtém o nome
         val name = binding.editName.text.toString()
+        // Verifica se usuário preencheu o nome
         if (name != "") {
 
             SecurityPreferences(this).storeString(MotivationConstants.KEY.USER_NAME, name)
@@ -51,7 +62,7 @@ class UserActivity : AppCompatActivity(), View.OnClickListener {
             //o finish mata a tela, e não a deixa ficar em memoria
             finish()
         } else {
-            //linha responsável por exibir uma mensagem na tela
+            // Salva os dados do usuário e redireciona para as frases
             Toast.makeText(
                 this,
                 R.string.validation_mandatory_name,

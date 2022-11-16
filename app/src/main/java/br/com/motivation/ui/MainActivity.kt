@@ -20,20 +20,25 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //Esconde a barra de navegação
+        // remove a supportActionBar
         supportActionBar?.hide()
 
         headleUserName()
         handleFilter(R.id.image_all)
         handleNextPhrase()
 
-        //Eventos
+        /**
+         * Atribui eventos aos elementos
+         */
         binding.btnNewPhrase.setOnClickListener(this)
         binding.imageAll.setOnClickListener(this)
         binding.imageEmotions.setOnClickListener(this)
         binding.imageSunny.setOnClickListener(this)
     }
 
+    /**
+     * Trata eventos de click
+     */
     override fun onClick(view: View) {
 
         if (view.id == R.id.btn_new_phrase) {
@@ -43,11 +48,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+
+    /**
+     * Atualiza frase de motivação
+     */
     private fun handleNextPhrase(){
         val  phrase = Mock().getPhrase(categoryId)
         binding.textPhrase.text = phrase
     }
 
+    /**
+     * Trata o filtro aplicado para as frases
+     */
     private fun handleFilter(id: Int) {
 
         binding.imageAll.setColorFilter(ContextCompat.getColor(this, R.color.dark_purple))
@@ -70,6 +82,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    /**
+     * Busca o nome do usuário
+     */
     private fun headleUserName() {
         val name = SecurityPreferences(this).getString(MotivationConstants.KEY.USER_NAME)
         binding.textUserName.text = "Olá $name!"
